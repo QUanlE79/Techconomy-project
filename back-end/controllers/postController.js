@@ -3,7 +3,10 @@ const { post } = require("../routes/authRoute");
 
 exports.getAllPosts = async (req, res, next) => {
   try {
-    const posts = await Post.find({}).populate("author");
+    //const posts = await Post.find({}).populate("author");
+    const posts = await Post.find({})
+      .populate("author", "name")
+      .select("content createAt");
     res.status(200).json({
       status: "success",
       results: post.length,
@@ -23,7 +26,7 @@ exports.createOnePost = async (req, res, next) => {
       data: { post },
     });
   } catch (error) {
-    res.json(error);
+    next(error);
   }
 };
 
@@ -40,7 +43,7 @@ exports.updateOnePost = async (req, res, next) => {
       data: { post },
     });
   } catch (error) {
-    res.json(error);
+    next(error);
   }
 };
 
@@ -53,6 +56,6 @@ exports.deleteOnePost = async (req, res, next) => {
       message: "Post have been deleted",
     });
   } catch (error) {
-    res.json(error);
+    next(error);
   }
 };
