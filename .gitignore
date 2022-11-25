@@ -105,7 +105,12 @@ dist
 
 # image
 *.jpg
-
+#document
+*.docx
+*.ppt
+*.pdf
+*.drawio
+*.xlsx
 #react
 
 # dependencies
